@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+               <h2>Current Screen Width: <span id="width"></span>px</h2>
+
+        
+           <div class="searchbar">
+            <div class="searchwrap">
+                <span class="icon">🔮</span>
+                <input type="search" id="searchbtn" placeholder="Extension">
+                <button class="toggle-btn" id="t-btn" onclick="theme()">⚙️</button>
+            </div>
+           </div>
+
+           <div class="subheading">
+            <h2>Extensions</h2>
+            <div class="btn-grps">
+                <button class="filter-btn"  id="fid" onclick="filter('all')">All</button>
+                <button class="filter-btn" onclick="filter('active')">Active</button>
+                <button class="filter-btn" onclick="filter('inactive')">Inactive</button>
+            </div>
+           </div>
+
+           <div class="container" id="cont"></div>
+
+           <script src="script.js"></script>
+
+         
+                  
+
+</body>
+</html>
