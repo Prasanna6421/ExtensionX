@@ -2,91 +2,96 @@ const extensions = [
   {
     id: 1,
     name: "DevLens",
-    description: "Quickly inspect page layouts and visualize element boundaries.",
+    description:
+      "Quickly inspect page layouts and visualize element boundaries.",
     img: "./images/logo-devlens.png",
-    active: true
+    active: true,
   },
   {
     id: 2,
     name: "StyleSpy",
     description: "Instantly analyze and copy CSS from any webpage element.",
-    img:"./images/logo-markup-notes.png",
-    active: true
+    img: "./images/logo-markup-notes.png",
+    active: true,
   },
   {
     id: 3,
     name: "SpeedBoost",
     description: "Optimizes browser resource usage to accelerate page loading.",
     img: "./images/logo-console-plus.png",
-    active: false
+    active: false,
   },
   {
     id: 4,
     name: "JSONWizard",
-    description: "Formats, validates, and prettifies JSON responses in-browser.",
+    description:
+      "Formats, validates, and prettifies JSON responses in-browser.",
     img: "images/logo-devlens.png",
-    active: true
+    active: true,
   },
   {
     id: 5,
     name: "TabMaster Pro",
     description: "Organizes browser tabs into groups and sessions.",
     img: "images/logo-devlens.png",
-    active: false
+    active: false,
   },
   {
     id: 6,
     name: "ViewportBuddy",
-    description: "Simulates various screen resolutions directly within the browser.",
+    description:
+      "Simulates various screen resolutions directly within the browser.",
     img: "images/logo-dom-snapshot.png",
-    active: false
+    active: false,
   },
   {
     id: 7,
     name: "Markup Notes",
-    description: "Enables annotation and notes directly onto webpages for collaborative debugging.",
+    description:
+      "Enables annotation and notes directly onto webpages for collaborative debugging.",
     img: "images/logo-grid-guides.png",
-    active: true
+    active: true,
   },
   {
     id: 8,
     name: "GridGuides",
-    description: "Overlay customizable grids and alignment guides on any webpage.",
+    description:
+      "Overlay customizable grids and alignment guides on any webpage.",
     img: "images/logo-json-wizard.png",
-    active: false
+    active: false,
   },
   {
     id: 9,
     name: "Palette Picker",
     description: "Instantly extracts color palettes from any webpage.",
     img: "images/logo-console-plus.png",
-    active: true
+    active: true,
   },
   {
     id: 10,
     name: "LinkChecker",
     description: "Scans and highlights broken links on any page.",
     img: "images/logo-link-checker.png",
-    active: true
+    active: true,
   },
   {
     id: 11,
     name: "DOM Snapshot",
     description: "Capture and export DOM structures quickly.",
     img: "images/logo-markup-notes.png",
-    active: false
+    active: false,
   },
   {
     id: 12,
     name: "ConsolePlus",
-    description: "Enhanced developer console with advanced filtering and logging.",
+    description:
+      "Enhanced developer console with advanced filtering and logging.",
     img: "images/logo-devlens.png",
-    active: true
-  }
+    active: true,
+  },
 ];
 
-
-const searchbtn =document.getElementById("searchbtn");
+const searchbtn = document.getElementById("searchbtn");
 const container = document.getElementById("cont");
 
 // function display(listItem){
@@ -100,23 +105,21 @@ const container = document.getElementById("cont");
 //                  <div class="content">
 //                  <h2>${m.name}</h2>
 //                   <p>${m.description}</p></div>
-                  
+
 //                  <div class="toggle-switch ${m.active ? 'active' : ''}" onclick="toggle(${m.id})">
 //                  <div class="knob"></div>
 //                  </div>
 //                   </div>
-               
+
 //                `
 //         });
 // };
 
-
-
-
-function display(listItem){
-        container.innerHTML =
-        listItem.map(m=>
-               `
+function display(listItem) {
+  container.innerHTML = listItem
+    .map(
+      (m) =>
+        `
                  <div class="card">
       <div class="top-row">
         <div class="logo">
@@ -129,79 +132,63 @@ function display(listItem){
       </div>
 
       <div class="bottom-row">
-        <button class="remove-btn" onclick="removeExtension(${m.id})">Remove</button>
+        <button class="remove-btn" onclick="removeExtension(${
+          m.id
+        })">Remove</button>
 
-        <div class="toggle-switch ${m.active ? "active" : ""}" onclick="toggle(${m.id})">
+        <div class="toggle-switch ${
+          m.active ? "active" : ""
+        }" onclick="toggle(${m.id})">
           <div class="knob"></div>
         </div>
       </div>
     </div>
             
                
-                 `).join("")
-        };
+                 `
+    )
+    .join("");
+}
 display(extensions);
 
-
 function removeExtension(id) {
-  const index = extensions.findIndex(item => item.id ===id);
+  const index = extensions.findIndex((item) => item.id === id);
   if (index !== -1) extensions.splice(index, 1);
   display(extensions);
 }
-
-
 
 // function removeExtension(id) {
 //    extensions = extensions.filter(item => item.id!==id);
 //   display(extensions);
 // }
 
+function toggle(id) {
+  let item = extensions.find((f) => f.id === id);
+  item.active = !item.active;
+  display(extensions);
+}
 
+function filter(type) {
+  const buttons = document.querySelectorAll(".filter-btn");
 
+  // remove 'selected' from all buttons
+  buttons.forEach((btn) => btn.classList.remove("selected"));
 
+  // add 'selected' to the clicked button
+  if (type === "all") buttons[0].classList.add("selected");
+  if (type === "active") buttons[1].classList.add("selected");
+  if (type === "inactive") buttons[2].classList.add("selected");
 
-
-
-
-function toggle(id){
-   let item = extensions.find(f=>f.id===id);
-   item.active =!item.active;
-   display(extensions);
-};
-
-function filter(type){
-
- const buttons = document.querySelectorAll(".filter-btn");
-
-    // remove 'selected' from all buttons
-    buttons.forEach(btn => btn.classList.remove("selected"));
-
-    // add 'selected' to the clicked button
-    if (type === "all") buttons[0].classList.add("selected");
-    if (type === "active") buttons[1].classList.add("selected");
-    if (type === "inactive") buttons[2].classList.add("selected");
-
-
-
-    if(type==="all"){
-         display(extensions);
-    }
-    else if(type==="active"){
-        display(extensions.filter(e=>e.active===true));
-    }
-    else if(type==="inactive"){
-        display(extensions.filter(f=>f.active===false))
-    }
+  if (type === "all") {
+    display(extensions);
+  } else if (type === "active") {
+    display(extensions.filter((e) => e.active === true));
+  } else if (type === "inactive") {
+    display(extensions.filter((f) => f.active === false));
+  }
 }
 
 display(extensions);
-
-
-
-
-
-
-
 
 const themebtn = document.getElementById("t-btn");
 
@@ -221,28 +208,31 @@ function theme() {
     // Remove fade-in class after animation ends
     setTimeout(() => {
       document.body.classList.remove("fade-in");
-    },300);
-
+    }, 300);
   }, 300);
 }
 
-
-
-
-
-
-
-searchbtn.addEventListener("keyup",(event)=>{
-     const text = event.target.value.toLowerCase().trim();
-     if(text===""){
-        return display(extensions);
-     }
-     const filt = extensions.filter(f=>f.name.toLowerCase().includes(text));
-     display(filt);
+searchbtn.addEventListener("keyup", (event) => {
+  const text = event.target.value.toLowerCase().trim();
+  if (text === "") {
+    return display(extensions);
+  }
+  const filt = extensions.filter((f) => f.name.toLowerCase().includes(text));
+  display(filt);
 });
 
 
+function createCard(data) {
+  const card = document.createElement("div");
+  card.classList.add("card", "fadeUp"); // add animation class
+  card.innerHTML = `<h3>${data.title}</h3><p>${data.desc}</p>`;
+  
+  card.addEventListener("animationend", () => {
+    card.classList.remove("fadeUp"); // remove after animation
+  });
 
+  container.appendChild(card);
+}
 
 
 
@@ -252,27 +242,15 @@ searchbtn.addEventListener("keyup",(event)=>{
 
 const widthSpan = document.getElementById("width");
 
-  function updateWidth() {
-    widthSpan.textContent = window.innerWidth;
-  }
+function updateWidth() {
+  widthSpan.textContent = window.innerWidth;
+}
 
-  // Initial display
-  updateWidth();
+// Initial display
+updateWidth();
 
-  // Update on resize
-  window.addEventListener("resize", updateWidth);
-
-
-
-
-
-
-
-
-
-
-
-
+// Update on resize
+window.addEventListener("resize", updateWidth);
 
 // const extensions = [
 //   { id: 1, name: "DevLens" },
@@ -287,10 +265,9 @@ const widthSpan = document.getElementById("width");
 
 // // No check
 // if(index !==-1)
-// extensions.splice(index, 1); 
+// extensions.splice(index, 1);
 
 // console.log("Array after splice:", extensions);
-
 
 // const extensions = [
 //   { id: 1, name: "DevLens" },
@@ -308,4 +285,4 @@ const widthSpan = document.getElementById("width");
 // }
 
 // // Example usage
-// removeExtension(2); 
+// removeExtension(2);
